@@ -14,4 +14,8 @@ export class AuthService {
       password,
     });
   }
+
+  get isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
 }
