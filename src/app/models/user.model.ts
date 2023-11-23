@@ -1,9 +1,11 @@
-export interface UsersListApi {
+export interface PaginationApi {
   page: number;
   per_page: number;
   total: number;
   total_pages: number;
-  data: UserDetails[];
+}
+export interface GetResponse<T> {
+  data: T;
 }
 
 export interface UserDetails {

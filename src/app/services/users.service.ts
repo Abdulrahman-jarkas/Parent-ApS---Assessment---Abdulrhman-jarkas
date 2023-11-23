@@ -1,5 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import {
+  CreateUserDto,
+  GetResponse,
+  PaginationApi,
+  UpdateUserDto,
+  UserDetails,
+} from '../models';
 
 //we can set it as environment variable in case we have multi environments.
 const BASEURL = 'https://reqres.in/api/';
@@ -12,18 +20,18 @@ export class UsersService {
   private readonly http = inject(HttpClient);
 
   users() {
-    return this.http.get(APIS.USERS);
+    return this.http.get<GetResponse<UserDetails & PaginationApi>>(APIS.USERS);
   }
 
   userDetails(id: number) {
-    return this.http.get(APIS.USERS + '/' + id);
+    return this.http.get<UserDetails>(APIS.USERS + '/' + id);
   }
 
-  createUser(body: any) {
+  createUser(body: CreateUserDto) {
     return this.http.post(APIS.USERS, { ...body });
   }
 
-  updateUser(id: number, body: any) {
+  updateUser(id: number, body: UpdateUserDto) {
     return this.http.put(APIS.USERS + '/' + id, { ...body });
   }
 
