@@ -8,9 +8,16 @@
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
-        <pagination [pagination]="data.pagination" (onChangePage)="changePage($event)"/>
+        <pagination
+          [pagination]="data.pagination"
+          (onChangePage)="changePage($event)"
+        />
       </div>
-      <app-table [data]="data.users" [columnsDef]="columnsDef" />
+      <app-table
+        [data]="data.users"
+        [columnsDef]="columnsDef"
+        (onRowClick)="getUser($event)"
+      />
     </div>
     <div class="col mt-2">
       <user-details />

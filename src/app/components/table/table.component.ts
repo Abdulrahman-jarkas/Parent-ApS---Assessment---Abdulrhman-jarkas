@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ColumnsDef } from '../../models';
 
@@ -12,4 +12,7 @@ import { ColumnsDef } from '../../models';
 export class TableComponent {
   @Input({ required: true }) data: any[] = [];
   @Input({ required: true }) columnsDef: ColumnsDef[] = [];
+  @Input({ required: false }) uniqueKey: string = 'id';
+
+  @Output() onRowClick = new EventEmitter<number>();
 }

@@ -53,4 +53,8 @@ export class UsersListComponent {
   changePage(page: number) {
     this.store.dispatch(UsersActions.getUsers(page));
   }
+
+  getUser(id: number) {
+    this.store.dispatch(UsersActions.getUsersByUserId(id));
+  }
 }
