@@ -28,7 +28,7 @@
   <text-input type="text" label="Name" formControlName="name" />
   <text-input type="text" label="Job" formControlName="job" />
 
-  <button [disabled]="form.invalid" class="btn btn-primary d-inline" style="width: fit-content">
+  <button [disabled]="form.invalid" (click)="submit()" class="btn btn-primary d-inline" style="width: fit-content">
     Save
   </button>
 </form>

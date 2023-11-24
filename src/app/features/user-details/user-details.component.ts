@@ -31,6 +31,7 @@ export class UserDetailsComponent {
       this.form.patchValue({
         name: data.first_name + ' ' + data.last_name,
         email: data.email,
+        job: '',
       });
 
       this.form.disable();
@@ -64,5 +65,15 @@ export class UserDetailsComponent {
 
   viewonly() {
     this.form.disable();
+  }
+
+  submit() {
+    const { email, ...value } = this.form.getRawValue();
+
+    this.store.dispatch(
+      this.user
+        ? UsersActions.updateUser(this.user.id, value)
+        : UsersActions.createUser(value)
+    );
   }
 }
