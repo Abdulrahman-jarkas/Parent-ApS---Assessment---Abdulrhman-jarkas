@@ -8,5 +8,7 @@
     [disabled]="disabled"
     (blur)="onTouched()"
     [id]="label"
+    [ngClass]="{ 'disabled-input': disabled }"
   />
+  <div class="error-msg" *ngIf="textControl.touched && textControl.invalid">enter valid value</div>
 </div>

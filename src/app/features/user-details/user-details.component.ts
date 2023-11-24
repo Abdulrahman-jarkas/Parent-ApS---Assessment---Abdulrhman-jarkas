@@ -50,23 +50,19 @@ export class UserDetailsComponent {
   });
 
   clear() {
-    // info message and note to select user;
     this.user = null;
   }
 
   delete() {
-    // info message and note to select user;
     this.store.dispatch(UsersActions.deleteUser(this.user?.id!));
   }
 
-  reload() {
-    // info message and note to select user;
-    this.store.dispatch(UsersActions.getUsersByUserId(this.user?.id!));
-  }
-
   edit() {
-    // info message and note to select user;
     this.form.get('name')?.enable();
     this.form.get('job')?.enable();
+  }
+
+  viewonly() {
+    this.form.disable();
   }
 }

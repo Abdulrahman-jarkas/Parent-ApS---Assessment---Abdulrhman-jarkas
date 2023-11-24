@@ -1,19 +1,17 @@
+import { NgClass, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import {
-  AbstractControl,
   ControlValueAccessor,
   FormControl,
-  NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
-  ValidationErrors,
-  Validator,
+  Validators,
 } from '@angular/forms';
 
 @Component({
   selector: 'text-input',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass, NgIf],
   templateUrl: './text-input.component.html',
   styleUrl: './text-input.component.scss',
   providers: [
@@ -22,18 +20,13 @@ import {
       multi: true,
       useExisting: TextInputComponent,
     },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: TextInputComponent,
-    },
   ],
 })
-export class TextInputComponent implements ControlValueAccessor, Validator {
+export class TextInputComponent implements ControlValueAccessor {
   @Input({ required: true }) type!: 'password' | 'email' | 'text';
   @Input({ required: true }) label!: string;
 
-  textControl = new FormControl('');
+  textControl = new FormControl('', [Validators.required]);
 
   onChange = () => {};
   onTouched = () => {};
@@ -46,7 +39,7 @@ export class TextInputComponent implements ControlValueAccessor, Validator {
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.textControl.valueChanges.subscribe(fn);
   }
 
   registerOnTouched(fn: any): void {
@@ -54,11 +47,6 @@ export class TextInputComponent implements ControlValueAccessor, Validator {
   }
 
   setDisabledState(disabled: boolean) {
-    console.log(disabled)
     this.disabled = disabled;
-  }
-
-  validate(control: AbstractControl<any, any>): ValidationErrors | null {
-    return null;
   }
 }

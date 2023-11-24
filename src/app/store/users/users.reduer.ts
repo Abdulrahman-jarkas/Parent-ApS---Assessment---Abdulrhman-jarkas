@@ -46,5 +46,5 @@ export const UserFeature = createFeature({
   ),
 });
 
-export const { name, reducer, selectErrors, selectUsers, selectPagination } =
+export const { name, reducer, selectErrors, selectUsers, selectPagination,selectSelectedUser } =
   UserFeature;

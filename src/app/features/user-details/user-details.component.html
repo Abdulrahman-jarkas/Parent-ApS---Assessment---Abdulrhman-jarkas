@@ -1,19 +1,25 @@
-<div class="d-flex gap-2">
-  <button class="btn action" (click)="reload()">
-    <i class="bi bi-arrow-repeat text-primary"></i>
-  </button>
+<div class="d-flex gap-2" *ngIf="user">
   <button class="btn action" (click)="clear()">
     <i class="bi bi-plus-lg text-primary"></i>
   </button>
-  <button class="btn action" (click)="edit()">
+  <button class="btn action" *ngIf="form.disabled" (click)="edit()">
     <i class="bi bi-pen-fill text-primary"></i>
+  </button>
+  <button class="btn action" *ngIf="!form.disabled" (click)="viewonly()">
+    <i class="bi bi-eye text-primary"></i>
   </button>
   <button class="btn action" (click)="delete()">
     <i class="bi bi-trash-fill text-primary"></i>
   </button>
 </div>
 
-<form [formGroup]="form" class="d-flex flex-column mt-3">
+<h3 class="text-secondary" *ngIf="!user">Add new user</h3>
+
+<form
+  [formGroup]="form"
+  class="d-flex flex-column mt-3 needs-validation"
+  novalidate
+>
   <ng-container *ngIf="user">
     <img [src]="user.avatar" class="avatar" />
     <text-input type="email" label="Email Address" formControlName="email" />
@@ -22,7 +28,7 @@
   <text-input type="text" label="Name" formControlName="name" />
   <text-input type="text" label="Job" formControlName="job" />
 
-  <button class="btn btn-primary d-inline" style="width: fit-content">
+  <button [disabled]="form.invalid" class="btn btn-primary d-inline" style="width: fit-content">
     Save
   </button>
 </form>
