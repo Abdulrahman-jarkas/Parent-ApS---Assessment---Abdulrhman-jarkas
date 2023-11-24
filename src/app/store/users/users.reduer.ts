@@ -7,6 +7,7 @@ interface IUserState {
   users: UserDetails[];
   pagination: PaginationApi;
   selectedUser: UserDetails | null;
+  loading: boolean;
 }
 
 const initState: IUserState = {
@@ -19,6 +20,7 @@ const initState: IUserState = {
     total: 0,
     total_pages: 0,
   },
+  loading: false,
 };
 
 export const UserFeature = createFeature({
@@ -31,20 +33,49 @@ export const UserFeature = createFeature({
         ...state,
         users: [...users.map((user) => ({ ...user }))],
         pagination: { ...pagination },
+        loading: true,
       };
     }),
     on(UsersActions.getUsersByUserIdSuccess, (state, { data }) => {
       return {
         ...state,
         selectedUser: { ...data },
+        loading: true,
       };
     }),
     on(UsersActions.failed, (state, { errors }) => ({
       ...state,
       errors,
+      loading: true,
+    })),
+    on(UsersActions.getUsers, (state) => ({
+      ...state,
+      loading: true,
+    })),
+    on(UsersActions.getUsersByUserId, (state) => ({
+      ...state,
+      loading: true,
+    })),
+    on(UsersActions.createUser, (state) => ({
+      ...state,
+      loading: true,
+    })),
+    on(UsersActions.updateUser, (state) => ({
+      ...state,
+      loading: true,
+    })),
+    on(UsersActions.deleteUser, (state) => ({
+      ...state,
+      loading: true,
     }))
   ),
 });
 
-export const { name, reducer, selectErrors, selectUsers, selectPagination,selectSelectedUser } =
-  UserFeature;
+export const {
+  name,
+  reducer,
+  selectErrors,
+  selectUsers,
+  selectPagination,
+  selectSelectedUser,
+} = UserFeature;

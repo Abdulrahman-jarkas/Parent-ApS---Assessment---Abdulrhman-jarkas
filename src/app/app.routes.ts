@@ -2,9 +2,20 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'auth',
+    path: 'register',
     loadComponent: () =>
       import('./features/auth/auth.component').then((c) => c.AuthComponent),
+    data: {
+      authType: 'register',
+    },
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./features/auth/auth.component').then((c) => c.AuthComponent),
+      data: {
+        authType: 'login',
+      },
   },
   {
     path: 'users',

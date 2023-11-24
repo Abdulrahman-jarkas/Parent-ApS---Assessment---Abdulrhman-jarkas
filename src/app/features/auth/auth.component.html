@@ -1,8 +1,19 @@
 <div class="d-flex align-items-center justify-content-center mt-5">
-  <form class="login">
-    <h2>Login!</h2>
-    <text-input type="email" label="Email address" />
-    <text-input type="password" label="Password" />
-    <button type="submit" class="btn btn-primary">Submit</button>
+  <form [formGroup]="form" class="login">
+    <h2>{{ authType === "login" ? "Login" : "Register" }}</h2>
+    <text-input type="email" label="Email address" formControlName="email" />
+    <text-input type="password" label="Password" formControlName="password" />
+    <div class="d-flex align-items-center justify-content-between mt-4">
+      <button type="button" class="btn btn-primary" (click)="save()">
+        Submit
+      </button>
+      <button
+        type="button"
+        [routerLink]="authType === 'login' ? '/register' : '/login'"
+        class="btn btn-link"
+      >
+        {{ authType === "login" ? "create new account?" : "go to login" }}
+      </button>
+    </div>
   </form>
 </div>

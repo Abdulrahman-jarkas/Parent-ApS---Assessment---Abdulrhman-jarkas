@@ -26,13 +26,19 @@ export class TextInputComponent implements ControlValueAccessor {
   @Input({ required: true }) type!: 'password' | 'email' | 'text';
   @Input({ required: true }) label!: string;
 
-  textControl = new FormControl('', [Validators.required]);
+  textControl = new FormControl('');
 
   onChange = () => {};
   onTouched = () => {};
 
   touched = false;
   disabled = false;
+
+  ngOnInit() {
+    if (this.type === 'email') {
+      this.textControl.addValidators(Validators.email);
+    }
+  }
 
   writeValue(value: string): void {
     this.textControl.setValue(value);

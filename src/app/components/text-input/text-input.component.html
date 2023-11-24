@@ -10,5 +10,14 @@
     [id]="label"
     [ngClass]="{ 'disabled-input': disabled }"
   />
-  <div class="error-msg" *ngIf="textControl.touched && textControl.invalid">enter valid value</div>
+  <div *ngIf="textControl.touched && textControl.invalid">
+    <span class="error-msg" *ngIf="textControl.getError('required')"
+      >this field is required</span
+    >
+    <span
+      class="error-msg"
+      *ngIf="!textControl.getError('required') && textControl.getError('email')"
+      >invalid email</span
+    >
+  </div>
 </div>
