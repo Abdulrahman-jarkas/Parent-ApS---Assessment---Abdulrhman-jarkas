@@ -15,12 +15,14 @@ const BASEURL = 'https://reqres.in/api/';
 const APIS = {
   USERS: BASEURL + 'users',
 };
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class UsersService {
   private readonly http = inject(HttpClient);
 
-  users() {
-    return this.http.get<GetResponse<UserDetails & PaginationApi>>(APIS.USERS);
+  users(page: number = 1) {
+    return this.http.get<GetResponse<UserDetails & PaginationApi>>(
+      APIS.USERS + `?page=${page}`
+    );
   }
 
   userDetails(id: number) {

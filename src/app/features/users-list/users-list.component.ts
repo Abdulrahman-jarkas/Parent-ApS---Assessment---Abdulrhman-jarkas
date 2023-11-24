@@ -1,16 +1,26 @@
-import { Component } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
 import { PaginationComponent, TableComponent } from '../../components';
 import { ColumnsDef } from '../../models';
+import { UsersService } from '../../services';
 import { UserDetailsComponent } from '../user-details/user-details.component';
 
 @Component({
   selector: 'app-users-list',
   standalone: true,
-  imports: [PaginationComponent, TableComponent, UserDetailsComponent],
+  imports: [
+    PaginationComponent,
+    TableComponent,
+    UserDetailsComponent,
+    HttpClientModule,
+  ],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.scss',
+  providers: [UsersService],
 })
 export class UsersListComponent {
+  private readonly usersService = inject(UsersService);
+
   columnsDef: ColumnsDef[] = [
     {
       name: 'Image',
@@ -60,4 +70,8 @@ export class UsersListComponent {
       email: 'abd@gmail.com',
     },
   ];
+
+  ngOnInit() {
+    this.usersService.users().subscribe(console.log);
+  }
 }
