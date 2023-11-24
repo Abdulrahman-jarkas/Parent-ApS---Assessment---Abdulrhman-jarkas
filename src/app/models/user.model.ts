@@ -1,12 +1,4 @@
-export interface PaginationApi {
-  page: number;
-  per_page: number;
-  total: number;
-  total_pages: number;
-}
-export interface GetResponse<T> {
-  data: T;
-}
+import { GetResponse, PaginationApi } from './utils.model';
 
 export interface UserDetails {
   id: number;
@@ -22,3 +14,7 @@ export interface CreateUserDto {
 }
 
 export interface UpdateUserDto extends CreateUserDto {}
+
+export type GetUsersListResponse = GetResponse<UserDetails[]> & PaginationApi;
+
+export type GetUserDetailsResponse = GetResponse<UserDetails>;
