@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { PaginationComponent, TableComponent } from '../../components';
 import { ColumnsDef } from '../../models';
@@ -8,15 +7,9 @@ import { UserDetailsComponent } from '../user-details/user-details.component';
 @Component({
   selector: 'app-users-list',
   standalone: true,
-  imports: [
-    PaginationComponent,
-    TableComponent,
-    UserDetailsComponent,
-    HttpClientModule,
-  ],
+  imports: [PaginationComponent, TableComponent, UserDetailsComponent],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.scss',
-  providers: [UsersService],
 })
 export class UsersListComponent {
   private readonly usersService = inject(UsersService);

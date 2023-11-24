@@ -13,7 +13,9 @@ const BASEURL = 'https://reqres.in/api/';
 const APIS = {
   USERS: BASEURL + 'users',
 };
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UsersService {
   private readonly http = inject(HttpClient);
 
