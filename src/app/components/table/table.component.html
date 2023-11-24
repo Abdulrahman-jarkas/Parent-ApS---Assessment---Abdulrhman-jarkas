@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th *ngFor="let col of columnsDef" scope="col" class="text-secondary">
@@ -9,7 +9,7 @@
   <tbody>
     <tr *ngFor="let item of data">
       <td *ngFor="let col of columnsDef">
-        <span *ngIf="col.type === 'text'">{{ item[col.key] }}</span>
+        <div class="mt-2" *ngIf="col.type === 'text'">{{ item[col.key] }}</div>
         <img
           *ngIf="col.type === 'image'"
           [src]="item[col.key]"

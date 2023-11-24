@@ -1,4 +1,4 @@
-<div class="m-4">
+<div class="m-4" *ngIf="data$ | async as data">
   <div class="row">
     <div class="col-md-8">
       <div class="d-flex align-items-baseline justify-content-between">
@@ -8,9 +8,9 @@
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
-        <pagination />
+        <pagination [pagination]="data.pagination" (onChangePage)="changePage($event)"/>
       </div>
-      <app-table [data]="data" [columnsDef]="columnsDef" />
+      <app-table [data]="data.users" [columnsDef]="columnsDef" />
     </div>
     <div class="col mt-2">
       <user-details />

@@ -1,18 +1,27 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { PaginationComponent, TableComponent } from '../../components';
 import { ColumnsDef } from '../../models';
-import { UsersService } from '../../services';
+import { UsersActions, usersUISelector } from '../../store/users';
 import { UserDetailsComponent } from '../user-details/user-details.component';
 
 @Component({
   selector: 'app-users-list',
   standalone: true,
-  imports: [PaginationComponent, TableComponent, UserDetailsComponent],
+  imports: [
+    PaginationComponent,
+    TableComponent,
+    UserDetailsComponent,
+    NgIf,
+    AsyncPipe,
+  ],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.scss',
 })
 export class UsersListComponent {
-  private readonly usersService = inject(UsersService);
+  private readonly store = inject(Store);
+  data$ = this.store.select(usersUISelector);
 
   columnsDef: ColumnsDef[] = [
     {
@@ -37,34 +46,11 @@ export class UsersListComponent {
     },
   ];
 
-  data = [
-    {
-      first_name: 'test',
-      last_name: 'test',
-      avatar:
-        'https://www.shareicon.net/data/128x128/2016/05/24/770137_man_512x512.png',
-      id: 1,
-      email: 'abd@gmail.com',
-    },
-    {
-      first_name: 'test 2',
-      last_name: 'test',
-      avatar:
-        'https://www.shareicon.net/data/128x128/2016/05/24/770137_man_512x512.png',
-      id: 2,
-      email: 'abd@gmail.com',
-    },
-    {
-      first_name: 'test 3',
-      last_name: 'test',
-      avatar:
-        'https://www.shareicon.net/data/128x128/2016/05/24/770137_man_512x512.png',
-      id: 3,
-      email: 'abd@gmail.com',
-    },
-  ];
-
   ngOnInit() {
-    this.usersService.users().subscribe(console.log);
+    this.changePage(1);
+  }
+
+  changePage(page: number) {
+    this.store.dispatch(UsersActions.getUsers(page));
   }
 }

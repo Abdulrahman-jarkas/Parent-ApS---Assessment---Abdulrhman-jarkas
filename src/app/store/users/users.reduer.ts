@@ -26,9 +26,11 @@ export const UserFeature = createFeature({
   reducer: createReducer(
     initState,
     on(UsersActions.getUsersSuccess, (state, { data }) => {
+      const { data: users, ...pagination } = data;
       return {
         ...state,
-        users: [...data.data.map((user) => ({ ...user }))],
+        users: [...users.map((user) => ({ ...user }))],
+        pagination: { ...pagination },
       };
     }),
     on(UsersActions.getUsersByUserIdSuccess, (state, { data }) => {
