@@ -1,22 +1,26 @@
 <div class="d-flex gap-2">
-  <button class="btn action">
+  <button class="btn action" (click)="reload()">
     <i class="bi bi-arrow-repeat text-primary"></i>
   </button>
-  <button class="btn action">
+  <button class="btn action" (click)="clear()">
     <i class="bi bi-plus-lg text-primary"></i>
   </button>
-  <button class="btn action">
+  <button class="btn action" (click)="edit()">
     <i class="bi bi-pen-fill text-primary"></i>
   </button>
-  <button class="btn action">
+  <button class="btn action" (click)="delete()">
     <i class="bi bi-trash-fill text-primary"></i>
   </button>
 </div>
 
-<form class="d-flex flex-column mt-3">
-  <text-input type="text" label="Name" />
-  <text-input type="text" label="Job" />
-  <text-input type="email" label="Email Address" />
+<form [formGroup]="form" class="d-flex flex-column mt-3">
+  <ng-container *ngIf="user">
+    <img [src]="user.avatar" class="avatar" />
+    <text-input type="email" label="Email Address" formControlName="email" />
+  </ng-container>
+
+  <text-input type="text" label="Name" formControlName="name" />
+  <text-input type="text" label="Job" formControlName="job" />
 
   <button class="btn btn-primary d-inline" style="width: fit-content">
     Save

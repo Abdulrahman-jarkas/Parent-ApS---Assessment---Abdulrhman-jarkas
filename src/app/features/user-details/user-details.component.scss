@@ -3,3 +3,10 @@
     background-color: rgb(202 234 244);
     border: 0px;
 }
+
+.avatar {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 50%;
+}

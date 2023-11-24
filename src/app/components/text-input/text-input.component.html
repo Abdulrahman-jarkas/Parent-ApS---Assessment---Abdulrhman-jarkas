@@ -4,6 +4,9 @@
     [type]="type"
     [formControl]="textControl"
     class="form-control"
+    [readonly]="disabled"
+    [disabled]="disabled"
+    (blur)="onTouched()"
     [id]="label"
   />
 </div>

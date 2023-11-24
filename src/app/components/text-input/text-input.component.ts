@@ -1,9 +1,13 @@
 import { Component, Input } from '@angular/core';
 import {
+  AbstractControl,
   ControlValueAccessor,
   FormControl,
+  NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
+  ValidationErrors,
+  Validator,
 } from '@angular/forms';
 
 @Component({
@@ -18,9 +22,14 @@ import {
       multi: true,
       useExisting: TextInputComponent,
     },
+    {
+      provide: NG_VALIDATORS,
+      multi: true,
+      useExisting: TextInputComponent,
+    },
   ],
 })
-export class TextInputComponent implements ControlValueAccessor {
+export class TextInputComponent implements ControlValueAccessor, Validator {
   @Input({ required: true }) type!: 'password' | 'email' | 'text';
   @Input({ required: true }) label!: string;
 
@@ -42,5 +51,14 @@ export class TextInputComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
+  }
+
+  setDisabledState(disabled: boolean) {
+    console.log(disabled)
+    this.disabled = disabled;
+  }
+
+  validate(control: AbstractControl<any, any>): ValidationErrors | null {
+    return null;
   }
 }
