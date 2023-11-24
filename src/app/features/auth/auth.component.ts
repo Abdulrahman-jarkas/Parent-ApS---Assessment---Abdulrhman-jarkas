@@ -34,10 +34,6 @@ export class AuthComponent implements OnDestroy {
     }),
   });
 
-  ngOnInit() {
-    this.authService.setToken('');
-  }
-
   save() {
     const { email, password } = this.form.getRawValue();
 

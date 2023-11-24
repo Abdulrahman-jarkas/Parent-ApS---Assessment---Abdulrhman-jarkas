@@ -13,4 +13,8 @@ import { AuthService } from '../../services';
 export class HeaderComponent {
   private authService = inject(AuthService);
   isLoggedIn = this.authService.isLoggedIn;
+
+  logout() {
+    this.authService.setToken('');
+  }
 }

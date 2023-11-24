@@ -4,6 +4,6 @@
       >Parent ApS - Assessment - Abdulrhman jarkas</a
     >
 
-    <button routerLink="/login" class="btn btn-secondary">logout</button>
+    <button routerLink="/login" class="btn btn-secondary" (click)="logout()" *ngIf="isLoggedIn">logout</button>
   </div>
 </nav>
