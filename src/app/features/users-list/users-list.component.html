@@ -1,5 +1,14 @@
-<h1 class="text-secondary">User list</h1>
-
-<app-table [data]="data" [columnsDef]="columnsDef" />
-
-<pagination />
+<div class="m-4">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="d-flex align-items-baseline justify-content-between">
+        <h1 class="text-secondary">User list</h1>
+        <pagination />
+      </div>
+      <app-table [data]="data" [columnsDef]="columnsDef" />
+    </div>
+    <div class="col mt-3">
+      <user-details />
+    </div>
+  </div>
+</div>

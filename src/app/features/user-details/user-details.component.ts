@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { TextInputComponent } from '../../components';
 
 @Component({
-  selector: 'app-user-details',
+  selector: 'user-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [TextInputComponent],
   templateUrl: './user-details.component.html',
-  styleUrl: './user-details.component.scss'
+  styleUrl: './user-details.component.scss',
 })
-export class UserDetailsComponent {
-
-}
+export class UserDetailsComponent {}

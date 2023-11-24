@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PaginationComponent, TableComponent } from '../../components';
 import { ColumnsDef } from '../../models';
+import { UserDetailsComponent } from '../user-details/user-details.component';
 
 @Component({
   selector: 'app-users-list',
   standalone: true,
-  imports: [CommonModule, PaginationComponent, TableComponent],
+  imports: [PaginationComponent, TableComponent, UserDetailsComponent],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.scss',
 })
@@ -27,6 +27,11 @@ export class UsersListComponent {
       type: 'text',
       key: 'last_name',
     },
+    {
+      name: 'Email',
+      type: 'text',
+      key: 'email',
+    },
   ];
 
   data = [
@@ -36,6 +41,7 @@ export class UsersListComponent {
       avatar:
         'https://www.shareicon.net/data/128x128/2016/05/24/770137_man_512x512.png',
       id: 1,
+      email: 'abd@gmail.com',
     },
     {
       first_name: 'test 2',
@@ -43,6 +49,7 @@ export class UsersListComponent {
       avatar:
         'https://www.shareicon.net/data/128x128/2016/05/24/770137_man_512x512.png',
       id: 2,
+      email: 'abd@gmail.com',
     },
     {
       first_name: 'test 3',
@@ -50,6 +57,7 @@ export class UsersListComponent {
       avatar:
         'https://www.shareicon.net/data/128x128/2016/05/24/770137_man_512x512.png',
       id: 3,
+      email: 'abd@gmail.com',
     },
   ];
 }
