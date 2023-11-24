@@ -67,6 +67,12 @@ export const UserFeature = createFeature({
     on(UsersActions.deleteUser, (state) => ({
       ...state,
       loading: true,
+    })),
+    on(UsersActions.deleteUserSuccess, (state, { id }) => ({
+      ...state,
+      loading: true,
+      selectedUser: null,
+      users: [...state.users.filter((u) => u.id !== id)],
     }))
   ),
 });

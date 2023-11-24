@@ -7,7 +7,7 @@ export class AlertService {
 
   success(msg: string) {
     Swal.fire({
-      position: 'top-end',
+      position: 'center',
       icon: 'success',
       title: msg,
       showConfirmButton: false,
@@ -27,9 +27,9 @@ export class AlertService {
     return Swal.fire({
       title: msg,
       showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Save',
-      denyButtonText: `Don't save`,
+      showCancelButton: false,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
     });
   }
 }

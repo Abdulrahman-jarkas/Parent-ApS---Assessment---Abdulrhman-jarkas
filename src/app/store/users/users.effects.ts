@@ -3,11 +3,13 @@ import { map, catchError, exhaustMap, EMPTY } from 'rxjs';
 import { UsersService } from '../../services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UsersActions } from './users.actions';
+import { AlertService } from '../../services/alert.service';
 
 @Injectable({ providedIn: 'root' })
 export class UsersEffictService {
   private readonly usersService = inject(UsersService);
   private readonly actions$ = inject(Actions);
+  private readonly alert = inject(AlertService);
 
   getUsersEffect$ = createEffect(() =>
     this.actions$.pipe(
@@ -44,7 +46,10 @@ export class UsersEffictService {
       ofType(UsersActions.createUser),
       exhaustMap(({ data }) =>
         this.usersService.createUser(data).pipe(
-          map(() => UsersActions.createUserSuccess()),
+          map(() => {
+            this.alert.success('User created successfully!');
+            return UsersActions.createUserSuccess();
+          }),
           catchError((errors: string[]) => {
             UsersActions.failed(errors);
             return EMPTY;
@@ -59,7 +64,11 @@ export class UsersEffictService {
       ofType(UsersActions.updateUser),
       exhaustMap(({ id, data }) =>
         this.usersService.updateUser(id, data).pipe(
-          map(() => UsersActions.updateUserSuccess()),
+          map(() => {
+            this.alert.success('User updated successfully!');
+
+            return UsersActions.updateUserSuccess();
+          }),
           catchError((errors: string[]) => {
             UsersActions.failed(errors);
             return EMPTY;
@@ -74,7 +83,11 @@ export class UsersEffictService {
       ofType(UsersActions.deleteUser),
       exhaustMap(({ id }) =>
         this.usersService.deleteUser(id).pipe(
-          map(() => UsersActions.deleteUserSuccess()),
+          map(() => {
+            this.alert.success('User deleted successfully!');
+
+            return UsersActions.deleteUserSuccess(id);
+          }),
           catchError((errors: string[]) => {
             UsersActions.failed(errors);
             return EMPTY;

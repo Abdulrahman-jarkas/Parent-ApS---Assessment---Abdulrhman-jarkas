@@ -24,7 +24,7 @@ export const UsersActions = createActionGroup({
     updateUserSuccess: emptyProps,
 
     deleteUser: (id: number) => ({ id }),
-    deleteUserSuccess: emptyProps,
+    deleteUserSuccess: (id: number) => ({ id }),
 
     failed: (errors: string[]) => ({ errors }),
   },

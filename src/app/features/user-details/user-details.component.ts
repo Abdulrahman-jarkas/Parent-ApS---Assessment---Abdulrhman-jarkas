@@ -9,6 +9,7 @@ import {
 import { Store } from '@ngrx/store';
 import { TextInputComponent } from '../../components';
 import { UserDetails } from '../../models';
+import { AlertService } from '../../services/alert.service';
 import { UsersActions } from '../../store/users';
 
 @Component({
@@ -20,6 +21,8 @@ import { UsersActions } from '../../store/users';
 })
 export class UserDetailsComponent {
   private readonly store = inject(Store);
+  private readonly alert = inject(AlertService);
+
   private _user!: UserDetails | null;
 
   get user() {
@@ -55,7 +58,13 @@ export class UserDetailsComponent {
   }
 
   delete() {
-    this.store.dispatch(UsersActions.deleteUser(this.user?.id!));
+    this.alert
+      .confirm('Are you sure you want to delete this user?')
+      .then((res) => {
+        if (res.isConfirmed) {
+          this.store.dispatch(UsersActions.deleteUser(this.user?.id!));
+        }
+      });
   }
 
   edit() {
