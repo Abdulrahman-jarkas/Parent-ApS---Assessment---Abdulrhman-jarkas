@@ -1,4 +1,8 @@
-<div class="d-flex align-items-center justify-content-center mt-5">
+<small class="text-secondary mx-3"
+  >if you want to access users list without login remove the auth guard from
+  routes in app routes</small
+>
+<div class="d-flex align-items-center justify-content-center mt-5 flex-column">
   <form [formGroup]="form" class="login">
     <h2>{{ authType === "login" ? "Login" : "Register" }}</h2>
     <text-input type="email" label="Email address" formControlName="email" />
