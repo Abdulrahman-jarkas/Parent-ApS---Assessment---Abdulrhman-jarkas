@@ -26,7 +26,7 @@ export class TextInputComponent implements ControlValueAccessor {
   @Input({ required: true }) type!: 'password' | 'email' | 'text';
   @Input({ required: true }) label!: string;
 
-  textControl = new FormControl('');
+  textControl = new FormControl('',[Validators.required]);
 
   onChange = () => {};
   onTouched = () => {};
